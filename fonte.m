@@ -9,6 +9,6 @@ for i=1:numbframes
    V=floor(size(im,1)./8).*8;
    H=floor(size(im,2)./8).*8;
    im=im(1:V,1:H,:);
-   S(i).imagem = im;
+   S(i).imagem = double(im);
 end
 end

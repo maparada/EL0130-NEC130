@@ -1,42 +1,1 @@
-clear all
-close all
-clc
-pkg load video
-pkg load image
-pkg load signal
-tic
-S=1;
-numbframes = 2;
-S_img = fonte('video3.mp4',numbframes);
-S_img2 = timePred (S_img);
-struct_Ycbcr = subamostragem (S_img2,2);
-S_Q = DCT_Quant(struct_Ycbcr,S);
-S_v = zigzag_aux_octave(S_Q);
-fun = @(block_struct) binario(block_struct);
-bin=struct('quadro',[]);
-for i = 1:length(S_v)
-bin(i).quadro = blockproc(S_v(i).vycbcr,[1 64],fun); 
-end
-
-
-fun = @(block_struct) decimal(block_struct);
-for i = 1:length(S_v)
-bin(i).quadro = reshape(bin(i).quadro,9,[])';
-end
-
-j=1;
-v=[];
-for i = 1:length(S_v)
-  eob = find(bin(i).quadro(:,1)=='1');
-  for k=1:length(eob)
-     v = [v decimal(bin(i).quadro(j:eob(k),:))];
-     j = eob(k)+1;
-   end
-   S_v2(i).quadro=v;
-   v=[];
-end
-
-%S_Qinv = IDCT_Quant(S_Q,S);
-%destino(S_Qinv,'videonovo.avi');
-
-
+clear allclose allclcpkg load imagepkg load signalpkg load videoticS=1;numbframes = 1;%% L� o v韉eoS_img = fonte('video3.mp4',numbframes);toctic%% CoderS_img2 = timePred (S_img);struct_Ycbcr = subamostragem (S_img,2);L = size(struct_Ycbcr(1).y,1);C = size(struct_Ycbcr(1).y,2);S_Q = DCT_Quant(struct_Ycbcr,S);S_v = zigzag_aux(S_Q);tocticbin(numbframes)=struct('quadro','');for i = 1:length(S_v)    for k=1:64:length(S_v(i).vycbcr)        bin(i).quadro = [bin(i).quadro binario(S_v(i).vycbcr(k:k+63))];     endendfor i = 1:length(S_v)bin(i).quadro = reshape(bin(i).quadro,9,[])';endtoctic%% Decoderv=zeros(1,length(S_v(1).vycbcr));S_v2(numbframes) = struct('quadro',[]);for i = 1:length(S_v)  eob = find(bin(i).quadro(:,1)=='1');  j=1;  l=1;  for k=1:length(eob)     v(l:l+63) = decimal(bin(i).quadro(j:eob(k),:));     j = eob(k)+1;     l=l+64;   end   S_v2(i).quadro=v;   v=[];endtocticS_Q2 = zigzaginv_aux(S_v2,L,C);S_Qinv = IDCT_Quant(S_Q2,S);S_up = subamostragem_up(S_Qinv,2);toc%%rgbStruct = invTimePred(S_up);tic%% grava o v韉eo destino(S_up,'videonovo.avi');toc
