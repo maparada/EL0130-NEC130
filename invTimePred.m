@@ -1,12 +1,12 @@
 function rgbStruct = invTimePred(frameStruct)
-    rgbStruct = struct('picture',[])
+    rgbStruct = struct('imagem',[]);
     auxIndex = 1;
     for i = 1 : 1 : length(frameStruct)
-        if auxIndex == 1 || rem(auxIndex, 10) == 0
-            rgbStruct(i).picture = frameStruct(i).picture;
+        if auxIndex == 1 || rem(auxIndex-1, 10) == 0
+            rgbStruct(i).imagem = frameStruct(i).imagem;
             auxIndex = auxIndex + 1;
         else
-            rgbStruct(i).picture = frameStruct(i).picture + rgbStruct(i - 1).picture;
+            rgbStruct(i).imagem = frameStruct(i).imagem + rgbStruct(i - 1).imagem;
             auxIndex = auxIndex + 1;
         end
     end

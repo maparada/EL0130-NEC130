@@ -44,6 +44,8 @@ end
 for i = 1:length(lin)
 cr_up(lin(i):taxa:end,col(i):taxa:end) = cr1;
 end
+
+y1 = y1(1:size(cr_up,1),1:size(cr_up,2));
  
 
 % converte a imagem resultante para R, G, B

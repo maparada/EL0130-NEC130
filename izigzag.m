@@ -42,4 +42,4 @@ function M = izigzag(v)
   end
   end
   
-endfunction
+end
