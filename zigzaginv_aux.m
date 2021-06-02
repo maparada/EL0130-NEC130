@@ -1,9 +1,14 @@
-function S_Q = zigzaginv_aux(S_V,L,C)
+function S_Q = zigzaginv_aux(S_V,L,C,sub)
  S_Q(length(S_V)) = struct('y',[],'cb',[],'cr',[]);
  %fun = @(block_struct) izigzag(block_struct.data);
  
-L2=floor((L/2)./8).*8;
-C2=floor((C/2)./8).*8;
+ if(sub==2)
+    L2=floor((L/2)./8).*8;
+    C2=floor((C/2)./8).*8;
+ else
+     L2=L;
+     C2=C;
+ end
 
  for k=1:length(S_V)
      vy = S_V(k).quadro(1:L*C);

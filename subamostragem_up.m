@@ -1,8 +1,7 @@
 function struct_RGB = subamostragem_up (struct_Ycbcr,taxa)
-  
   struct_RGB(length(struct_Ycbcr)) = struct('imagem',[]);
   
-  for k=1:length(struct_Ycbcr)
+for k=1:length(struct_Ycbcr)
 y1 = struct_Ycbcr(k).y;
 cb1 = struct_Ycbcr(k).cb;
 cr1= struct_Ycbcr(k).cr;

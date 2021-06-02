@@ -1,4 +1,4 @@
-function S = fonte(nome,numbframes)
+function [S,tambin] = fonte(nome,numbframes)
 v = VideoReader(nome);
 S = struct('imagem',[]);
 if (length(numbframes)==0)
@@ -11,4 +11,7 @@ for i=1:numbframes
    im=im(1:V,1:H,:);
    S(i).imagem = double(im);
 end
+
+tambin = H*V*24*numbframes;
+
 end

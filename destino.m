@@ -1,7 +1,7 @@
-function destino(struct_IDCT,nome)
+function destino(struct_IDCT,nome,frames)
   
 v = VideoWriter(nome);
-v.FrameRate = 10;
+v.FrameRate = frames;
 open(v)
 
 for i =1:length(struct_IDCT)
